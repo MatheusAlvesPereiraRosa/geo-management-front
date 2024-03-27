@@ -70,7 +70,7 @@ export const Home = () => {
         <>
             <Navbar />
             <main className="w-full px-10">
-                <div className="mx-auto flex flex-col items-center justify-center lg:max-md:flex-row max-sm:flex-col">
+                <div className="mx-auto flex flex-col items-center justify-center lg:max-md:flex-row max-sm:flex-col mb-10">
                     <h1 className='my-10 text-4xl text-white'>Usuários cadastrados</h1>
 
                     <UserList users={users} />
