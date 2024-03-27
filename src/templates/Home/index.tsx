@@ -7,6 +7,7 @@ import { Navbar } from '../../components/Navbar'
 import { UserList } from '../../components/UserList'
 import { RefreshButton } from '../../components/RefreshButton'
 import { DistanceButton } from '../../components/DistanceButton'
+import { Modal } from '../../components/Modal'
 
 export const Home = () => {
     const [users, setUsers] = useState<User[]>([])
@@ -25,6 +26,14 @@ export const Home = () => {
     useEffect(() => {
         extractedPoints()
     }, [users])
+
+    const showModal = () => {
+        setIsShow(true)
+    }
+
+    const closeModal = () => {
+        setIsShow(false)
+    }
 
     const extractedPoints = () => {
         const points = users.flatMap(user => {
@@ -67,7 +76,8 @@ export const Home = () => {
                     <UserList users={users} />
                 </div>
             </main>
-            <DistanceButton distance={calcDistance} />
+            <Modal isShow={isShow} closeModal={closeModal} path={path}/>
+            <DistanceButton showModal={showModal} distance={calcDistance} />
             <RefreshButton refresh={getUser} />
         </>
     )
