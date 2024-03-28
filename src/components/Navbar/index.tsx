@@ -1,21 +1,29 @@
 import { NavLink } from "react-router-dom"
 import logo from '../../assets/logo.png'
 
-import './index.css'
+import { motion } from 'framer-motion'
 
 export const Navbar = () => (
     <nav className="bg-cyan-900">
         <ul className="flex items-center">
-            <li className="p-3 text-xl text-white">
+            <motion.li
+                whileTap={{ scale: 0.9 }}
+                className="p-3 text-xl text-white"
+            >
                 <NavLink to="/">
                     <img className="logo aspect-auto" src={logo}></img>
                 </NavLink>
-            </li>
-            <li className="p-3 text-xl text-white">
-                <NavLink to="/create">
-                    Create
+            </motion.li>
+            <motion.li
+                whileTap={{ scale: 0.9 }}
+                className="p-3 text-xl text-white "
+            >
+                <NavLink to="/create" className={({ isActive, isPending }: {isActive: boolean, isPending: boolean}) => {
+                    return isActive ? "active-link" : isPending ? "pending" : "";
+                }}>
+                    <a className="hover:text-amber-500 link">Create</a>
                 </NavLink>
-            </li>
+            </motion.li>
         </ul>
     </nav>
 )

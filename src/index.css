@@ -2,22 +2,60 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@layer utilities {
+    .logo {
+        width: 5rem;
+    }
+
+    .hover-link {
+        @apply text-amber-500;
+        text-shadow: 0 0 5px rgba(248, 190, 42, 0.8);
+    }
+
+    .active-link {
+        @apply text-amber-500;
+        text-shadow: 0 0 5px rgba(248, 190, 42, 0.8);
+    }
+}
+
 body {
     background-color: rgb(3, 59, 73);
     position: relative;
     min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: lexend, sans-serif
-}
+@layer base {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: lexend, sans-serif
+    }
 
-p, a {
-    font-family: lexend, Verdana;
-}
+    p,
+    a {
+        font-family: lexend, Verdana;
+    }
 
-.icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    body::-webkit-scrollbar {
+        width: .95rem;
+    }
+
+    body::-webkit-scrollbar-track {
+        background: rgb(3, 59, 73);
+    }
+
+    body::-webkit-scrollbar-thumb {
+        @apply bg-amber-600;
+        border: 3px solid rgb(3, 59, 73);
+        border-radius: 20px;
+    }
 }

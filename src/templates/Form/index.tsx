@@ -6,6 +6,8 @@ import { FaUserLarge, FaSquarePhoneFlip } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { GrWaypoint } from "react-icons/gr";
 
+import { motion } from 'framer-motion'
+
 import axios from "axios";
 
 export const Form = () => {
@@ -60,7 +62,12 @@ export const Form = () => {
         <>
             <Navbar />
             <div className="flex justify-center my-12">
-                <form onSubmit={handleSubmit} className="bg-cyan-900 shadow-md rounded-lg px-8 pt-6 pb-8">
+                <motion.form
+                    initial={{ opacity: 0, translateY: 50 }}
+                    animate={{ opacity: 1, translateY: 0 }}
+                    transition={{ duration: 0.3}}
+                    onSubmit={handleSubmit} className="bg-cyan-900 shadow-md rounded-lg px-8 pt-6 pb-8"
+                >
                     <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
                         <div className="">
                             <div className="flex items-center mb-2">
@@ -140,7 +147,7 @@ export const Form = () => {
                     <button type="submit" className="w-full grid grid-cols-subgrid bg-amber-600 text-white mt-6 hover:bg-white hover:text-amber-600 transition p-3 rounded-md">
                         Enviar
                     </button>
-                </form>
+                </motion.form>
             </div>
         </>
     )

@@ -8,6 +8,7 @@ import { UserList } from '../../components/UserList'
 import { RefreshButton } from '../../components/RefreshButton'
 import { DistanceButton } from '../../components/DistanceButton'
 import { Modal } from '../../components/Modal'
+import { Loading } from '../../components/Loading'
 
 export const Home = () => {
     const [users, setUsers] = useState<User[]>([])
@@ -18,6 +19,7 @@ export const Home = () => {
     })
 
     const [isShow, setIsShow] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         getUser()
@@ -39,15 +41,18 @@ export const Home = () => {
         const points = users.flatMap(user => {
             return { x: parseFloat(user.coordinatesX), y: parseFloat(user.coordinatesY) };
         });
-        //console.log(points)
         setPoints(points)
     };
 
     const getUser = async () => {
+        setIsLoading(true)
         await axios
             .get("http://localhost:3000/users")
             .then((res) => {
-                setUsers(res.data)
+                setTimeout(() => {
+                    setUsers(res.data)
+                    setIsLoading(false)
+                }, 2000);
             })
             .catch((err) => {
                 console.log(err)
@@ -57,7 +62,7 @@ export const Home = () => {
     const calcDistance = async () => {
         console.log(points)
         await axios
-            .post("http://localhost:3000/users/calculateDistanceSolution", {points: points})
+            .post("http://localhost:3000/users/calculateDistanceSolution", { points: points })
             .then((res) => {
                 setPath(res.data)
             })
@@ -73,10 +78,12 @@ export const Home = () => {
                 <div className="mx-auto flex flex-col items-center justify-center lg:max-md:flex-row max-sm:flex-col mb-10">
                     <h1 className='my-10 text-4xl text-white'>Usuários cadastrados</h1>
 
-                    <UserList users={users} />
+                    {isLoading === true ? <Loading /> :
+                        <UserList users={users} />
+                    }
                 </div>
             </main>
-            <Modal isShow={isShow} closeModal={closeModal} path={path}/>
+            <Modal isShow={isShow} closeModal={closeModal} path={path} />
             <DistanceButton showModal={showModal} distance={calcDistance} />
             <RefreshButton refresh={getUser} />
         </>

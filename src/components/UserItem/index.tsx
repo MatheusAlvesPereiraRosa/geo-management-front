@@ -4,18 +4,26 @@ import { FaUserLarge, FaSquarePhoneFlip } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { GrWaypoint } from "react-icons/gr";
 
+import { motion } from 'framer-motion'
+
 interface Props {
     name: string
     email: string
     phoneNumber: string
     coordinatesX: string
     coordinatesY: string
+    index: number
 }
 
-export const UserItem = ({ name, email, phoneNumber, coordinatesX, coordinatesY }: Props) => {
+export const UserItem = ({ name, email, phoneNumber, coordinatesX, coordinatesY, index }: Props) => {
 
     return (
-        <div className='flex bg-amber-600 rounded-md p-4 flex-col gap-4 shadow-card'>
+        <motion.div
+            initial={{ opacity: 0, translateY: 50 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.25 }}
+            className='flex bg-amber-600 rounded-md p-4 flex-col gap-4 shadow-card'
+        >
             <div className="flex border-b-4 pb-2 border-white">
                 <span className="icon me-2">
                     <FaUserLarge className="text-white" />
@@ -47,6 +55,6 @@ export const UserItem = ({ name, email, phoneNumber, coordinatesX, coordinatesY 
                     <p className='text-md text-white'>Y: {coordinatesY}</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
