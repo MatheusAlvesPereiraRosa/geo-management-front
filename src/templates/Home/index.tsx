@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { User, Coordinates, Path } from '../../interfaces'
 
+import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 
 import { Navbar } from '../../components/Navbar'
@@ -10,24 +11,19 @@ import { DistanceButton } from '../../components/DistanceButton'
 import { Modal } from '../../components/Modal'
 import { Loading } from '../../components/Loading'
 
+import { fetchUsers, fetchPath } from '../../redux/user/userSlice'
+import { RootState } from '@reduxjs/toolkit/query'
+
 export const Home = () => {
-    const [users, setUsers] = useState<User[]>([])
-    const [points, setPoints] = useState<Coordinates[]>([])
-    const [path, setPath] = useState<Path>({
-        distance: 0,
-        points: []
-    })
+    const dispatch = useDispatch()
+    const { users, isLoading, path } = useSelector((state: RootState) => state.user)
 
     const [isShow, setIsShow] = useState<boolean>(false)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
-        getUser()
-    }, [])
-
-    useEffect(() => {
-        extractedPoints()
-    }, [users])
+        dispatch(fetchUsers())
+        console.log("Tô executando")
+    }, [dispatch])
 
     const showModal = () => {
         setIsShow(true)
@@ -35,40 +31,6 @@ export const Home = () => {
 
     const closeModal = () => {
         setIsShow(false)
-    }
-
-    const extractedPoints = () => {
-        const points = users.flatMap(user => {
-            return { x: parseFloat(user.coordinatesX), y: parseFloat(user.coordinatesY) };
-        });
-        setPoints(points)
-    };
-
-    const getUser = async () => {
-        setIsLoading(true)
-        await axios
-            .get("http://localhost:3000/users")
-            .then((res) => {
-                setTimeout(() => {
-                    setUsers(res.data)
-                    setIsLoading(false)
-                }, 2000);
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
-    const calcDistance = async () => {
-        console.log(points)
-        await axios
-            .post("http://localhost:3000/users/calculateDistanceSolution", { points: points })
-            .then((res) => {
-                setPath(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
     }
 
     return (
@@ -84,8 +46,8 @@ export const Home = () => {
                 </div>
             </main>
             <Modal isShow={isShow} closeModal={closeModal} path={path} />
-            <DistanceButton showModal={showModal} distance={calcDistance} />
-            <RefreshButton refresh={getUser} />
+            <DistanceButton showModal={showModal} users={users}/> 
+            <RefreshButton refresh={() => (dispatch(fetchUsers()))} />
         </>
     )
 }

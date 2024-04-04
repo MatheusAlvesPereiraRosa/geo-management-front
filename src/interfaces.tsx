@@ -3,6 +3,10 @@ interface Path {
     points: Coordinates[]
 }
 
+interface Points {
+    points: Coordinates[]
+}
+
 interface Coordinates {
     x: string | number
     y: string | number
@@ -23,4 +27,4 @@ interface User {
     coordinatesY: string
 }
 
-export type { Coordinates, UserForm, User, Path }
+export type { Coordinates, Points, UserForm, User, Path }
