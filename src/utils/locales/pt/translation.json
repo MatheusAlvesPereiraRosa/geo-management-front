@@ -5,5 +5,11 @@
     "modal-title": "A rota mais rápida da firma entre os pontos voltando para o início",
     "modal-title-near": "A rota aprox. mais rápida da firma entre os pontos voltando para o início",
     "firm": "Firma",
-    "modal-result": "Dist. do caminho"
+    "modal-result": "Dist. do caminho",
+
+    "form-name": "Nome",
+    "form-email": "Email",
+    "form-phoneNumber": "Telefone",
+    "form-coordinates": "Coordenadas",
+    "form-submit": "Enviar"
 }

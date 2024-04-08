@@ -8,7 +8,13 @@ import { GrWaypoint } from "react-icons/gr";
 
 import { motion } from 'framer-motion'
 
+import { useSelector } from 'react-redux'
+import { RootState } from "../../redux/store";
+
+import { useTranslation } from "react-i18next";
+
 import axios from "axios";
+
 
 export const Form = () => {
     const [form, setForm] = useState<UserForm>({
@@ -20,6 +26,11 @@ export const Form = () => {
             y: ""
         }
     })
+
+    const { t } = useTranslation()
+
+    const { lang } = useSelector((state: RootState) => state.language)
+
     const [message, setMessage] = useState({})
 
     const createUser = async () => {
@@ -60,19 +71,19 @@ export const Form = () => {
 
     return (
         <>
-            <Navbar />
+            <Navbar lang={lang} />
             <div className="flex justify-center my-12">
                 <motion.form
                     initial={{ opacity: 0, translateY: 50 }}
                     animate={{ opacity: 1, translateY: 0 }}
-                    transition={{ duration: 0.3}}
+                    transition={{ duration: 0.3 }}
                     onSubmit={handleSubmit} className="bg-cyan-900 shadow-md rounded-lg px-8 pt-6 pb-8"
                 >
                     <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4">
                         <div className="">
                             <div className="flex items-center mb-2">
                                 <span className="me-2"><FaUserLarge className="icon text-white" size={16} /></span>
-                                <label htmlFor="name" className="text-md block text-white font-bold">Nome</label>
+                                <label htmlFor="name" className="text-md block text-white font-bold">{t('form-name')}</label>
                             </div>
                             <input
                                 name="name"
@@ -86,7 +97,7 @@ export const Form = () => {
                         <div className="">
                             <div className="flex items-center mb-2">
                                 <span className="me-2"><MdEmail className="icon text-white" size={18} /></span>
-                                <label htmlFor="email" className="text-md block text-white font-bold ">Email</label>
+                                <label htmlFor="email" className="text-md block text-white font-bold ">{t('form-email')}</label>
                             </div>
                             <input
                                 name="email"
@@ -100,7 +111,7 @@ export const Form = () => {
                         <div className="">
                             <div className="flex items-center mb-2">
                                 <span className="me-2"><FaSquarePhoneFlip className="icon text-white" size={18} /></span>
-                                <label htmlFor="phoneNumber" className="text-md block text-white font-bold ">Telefone</label>
+                                <label htmlFor="phoneNumber" className="text-md block text-white font-bold ">{t('form-phoneNumber')}</label>
                             </div>
                             <input
                                 name="phoneNumber"
@@ -117,7 +128,7 @@ export const Form = () => {
                         <div className="">
                             <div className="flex items-center mb-2">
                                 <span className="me-2"><GrWaypoint className="icon text-white" size={18} /></span>
-                                <label htmlFor="x" className="text-md block text-white font-bold ">Coordenadas - X</label>
+                                <label htmlFor="x" className="text-md block text-white font-bold ">{t('form-coordinates')} - X</label>
                             </div>
                             <input
                                 name="x"
@@ -131,7 +142,7 @@ export const Form = () => {
                         <div className="">
                             <div className="flex items-center mb-2">
                                 <span className="me-2"><GrWaypoint className="icon text-white" size={18} /></span>
-                                <label htmlFor="y" className="text-md block text-white font-bold ">Coordenadas - Y</label>
+                                <label htmlFor="y" className="text-md block text-white font-bold ">{t('form-coordinates')} - Y</label>
                             </div>
                             <input
                                 name="y"
@@ -145,7 +156,7 @@ export const Form = () => {
                     </div>
 
                     <button type="submit" className="w-full grid grid-cols-subgrid bg-amber-600 text-white mt-6 hover:bg-white hover:text-amber-600 transition p-3 rounded-md">
-                        Enviar
+                        {t('form-submit')}
                     </button>
                 </motion.form>
             </div>

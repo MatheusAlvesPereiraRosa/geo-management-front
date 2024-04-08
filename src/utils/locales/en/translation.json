@@ -5,5 +5,11 @@
     "modal-title": "The firm's fastest route between points returning to the beginning",
     "modal-title-near": "The firm's nearest fastest route between points returning to the beginning",
     "firm": "Firm",
-    "modal-result": "Path distance"
+    "modal-result": "Path distance",
+
+    "form-name": "Name",
+    "form-email": "Email",
+    "form-phoneNumber": "Phone Number",
+    "form-coordinates": "Coordinates",
+    "form-submit": "Submit"
 }

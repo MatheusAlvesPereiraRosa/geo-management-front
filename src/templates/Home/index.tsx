@@ -11,7 +11,7 @@ import { Modal } from '../../components/Modal'
 import { Loading } from '../../components/Loading'
 
 import { fetchUsers } from '../../redux/user/userSlice'
-import { RootState } from '@reduxjs/toolkit/query'
+import { RootState } from '../../redux/store'
 
 export const Home = () => {
     const dispatch = useDispatch()
