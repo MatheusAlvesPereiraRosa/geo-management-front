@@ -1,7 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit'
+
+import { LanguageState } from '../interfaces'
+
+import { useTranslation } from 'react-i18next'
 
 const initialState: LanguageState = {
-    lang: 'pt-br'
+    lang: 'pt'
 }
 
 const languageSlice = createSlice({
@@ -13,3 +17,7 @@ const languageSlice = createSlice({
         }
     }
 })
+
+export const { setLanguage } = languageSlice.actions
+
+export default languageSlice.reducer

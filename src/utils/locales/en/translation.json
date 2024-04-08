@@ -1,0 +1,9 @@
+{
+    "title-users": "Registered Users",
+    "nav-create": "Create",
+    "user-coords": "User coords",
+    "modal-title": "The firm's fastest route between points returning to the beginning",
+    "modal-title-near": "The firm's nearest fastest route between points returning to the beginning",
+    "firm": "Firm",
+    "modal-result": "Path distance"
+}

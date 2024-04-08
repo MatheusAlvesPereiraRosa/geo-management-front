@@ -6,9 +6,13 @@ import {
 import ReactDOM from 'react-dom/client'
 import { Home } from './templates/Home'
 import { Form } from './templates/Form';
+
 import { Provider } from 'react-redux';
-import './index.css'
 import { store } from './redux/store';
+
+import './utils/i18n'
+
+import './index.css'
 
 const router = createBrowserRouter([
     {

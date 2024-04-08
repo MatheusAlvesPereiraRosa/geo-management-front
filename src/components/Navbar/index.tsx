@@ -5,16 +5,23 @@ import brasil from "../../assets/brasil.png";
 import usa from "../../assets/estados-unidos.png";
 import Select from "react-select";
 
+import { useDispatch } from 'react-redux'
+
 import { motion } from 'framer-motion'
+import { setLanguage } from "../../redux/language/languageSlice";
+import { useTranslation } from "react-i18next";
 interface Props {
     lang: string;
-    setLang: React.Dispatch<string>;
 }
 
-export const Navbar = ({ lang, setLang }: Props) => {
+export const Navbar = ({ lang }: Props) => {
+    const dispatch = useDispatch()
+
+    const {t} = useTranslation()
+
     const LANGUAGE_OPTIONS = [
         {
-            value: "pt-br",
+            value: "pt",
             label: (
                 <span className="flex justify-center">
                     <img className="w-6 aspect-auto" src={brasil} alt="PT-BR" />
@@ -25,7 +32,7 @@ export const Navbar = ({ lang, setLang }: Props) => {
             value: "en",
             label: (
                 <span className="flex justify-center">
-                    <img className="w-6 aspect-auto" src={usa} alt="PT-BR" />
+                    <img className="w-6 aspect-auto" src={usa} alt="EN" />
                 </span>
             ),
         },
@@ -58,7 +65,7 @@ export const Navbar = ({ lang, setLang }: Props) => {
                             return isActive ? "active-link" : isPending ? "pending" : "";
                         }}
                     >
-                        <a className="hover:text-amber-500 link">Create</a>
+                        <a className="hover:text-amber-500 link">{t('nav-create')}</a>
                     </NavLink>
                 </motion.li>
             </ul>
@@ -72,7 +79,7 @@ export const Navbar = ({ lang, setLang }: Props) => {
                     )}
                     isSearchable={false}
                     onChange={(lang) => {
-                        setLang(lang.value);
+                        dispatch(setLanguage(lang.value));
                         console.log("Selected language:", lang);
                     }}
                 />

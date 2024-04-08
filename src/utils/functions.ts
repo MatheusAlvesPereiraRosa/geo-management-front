@@ -1,4 +1,4 @@
-import { User } from "./interfaces";
+import { User } from "../interfaces";
 
 export const extractedPoints = (users: User[]) => {
     const points = users.flatMap(user => {

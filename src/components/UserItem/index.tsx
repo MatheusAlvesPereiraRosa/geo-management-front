@@ -5,6 +5,7 @@ import { MdEmail } from "react-icons/md";
 import { GrWaypoint } from "react-icons/gr";
 
 import { motion } from 'framer-motion'
+import { useTranslation } from "react-i18next";
 
 interface Props {
     name: string
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export const UserItem = ({ name, email, phoneNumber, coordinatesX, coordinatesY, index }: Props) => {
+    const {t} = useTranslation()
 
     return (
         <motion.div
@@ -49,7 +51,7 @@ export const UserItem = ({ name, email, phoneNumber, coordinatesX, coordinatesY,
                         <span className="icon me-2 text-white">
                             <GrWaypoint />
                         </span>
-                        <h2 className="text-md text-white">Coordenadas do usuário</h2>
+                        <h2 className="text-md text-white">{t('user-coords')}</h2>
                     </div>
                     <p className='text-md text-white'>X: {coordinatesX}</p>
                     <p className='text-md text-white'>Y: {coordinatesY}</p>

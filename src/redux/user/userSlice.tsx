@@ -3,7 +3,7 @@ import { UserState } from "../interfaces"
 import { User, UserForm, Coordinates, Path } from "../../interfaces"
 
 import axios from "axios"
-import { extractedPoints } from "../../utils"
+import { extractedPoints } from "../../utils/functions"
 
 
 /* Initial State */

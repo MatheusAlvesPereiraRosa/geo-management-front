@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import { User, Coordinates, Path } from '../../interfaces'
-
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
+
+import { useTranslation } from 'react-i18next'
 
 import { Navbar } from '../../components/Navbar'
 import { UserList } from '../../components/UserList'
@@ -11,12 +10,18 @@ import { DistanceButton } from '../../components/DistanceButton'
 import { Modal } from '../../components/Modal'
 import { Loading } from '../../components/Loading'
 
-import { fetchUsers, fetchPath } from '../../redux/user/userSlice'
+import { fetchUsers } from '../../redux/user/userSlice'
 import { RootState } from '@reduxjs/toolkit/query'
 
 export const Home = () => {
     const dispatch = useDispatch()
+
+    const { t } = useTranslation()
+
     const { users, isLoading, path } = useSelector((state: RootState) => state.user)
+    const { lang } = useSelector((state: RootState) => state.language)
+
+    console.log(lang)
 
     const [isShow, setIsShow] = useState<boolean>(false)
 
@@ -35,10 +40,10 @@ export const Home = () => {
 
     return (
         <>
-            <Navbar />
+            <Navbar lang={lang} />
             <main className="w-full px-10">
                 <div className="mx-auto flex flex-col items-center justify-center lg:max-md:flex-row max-sm:flex-col mb-10">
-                    <h1 className='my-10 text-4xl text-white'>Usuários cadastrados</h1>
+                    <h1 className='my-10 text-4xl text-white'>{t('title-users')}</h1>
 
                     {isLoading === true ? <Loading /> :
                         <UserList users={users} />
@@ -46,7 +51,7 @@ export const Home = () => {
                 </div>
             </main>
             <Modal isShow={isShow} closeModal={closeModal} path={path} />
-            <DistanceButton showModal={showModal} users={users}/> 
+            <DistanceButton showModal={showModal} users={users} />
             <RefreshButton refresh={() => (dispatch(fetchUsers()))} />
         </>
     )

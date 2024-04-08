@@ -4,7 +4,12 @@ import { IoLocationSharp } from "react-icons/io5";
 import { MdOutlineLocationCity } from "react-icons/md";
 import { FaArrowDown } from "react-icons/fa";
 import { LiaMapSignsSolid } from "react-icons/lia";
+
 import { motion, AnimatePresence } from "framer-motion";
+
+import { useTranslation } from "react-i18next";
+
+import "./index.css"
 
 interface Props {
     isShow: boolean;
@@ -13,6 +18,8 @@ interface Props {
 }
 
 export const Modal = ({ isShow, closeModal, path }: Props) => {
+    const {t} = useTranslation()
+
     const finalPath = path.points.length - 1;
 
     return (
@@ -44,12 +51,12 @@ export const Modal = ({ isShow, closeModal, path }: Props) => {
                             </div>
 
                             {path.points.length > 10 ? (
-                                <h1 className="text-white text-xl">
-                                    A rota aprox. mais rápida da firma entre <br /> os pontos voltando para o início
+                                <h1 className="text-white text-xl text-center title-max">
+                                    {t('modal-title-near')}
                                 </h1>
                             ) : (
-                                <h1 className="text-white text-xl">
-                                    A rota mais rápida da firma entre <br /> os pontos voltando para o início
+                                <h1 className="text-white text-xl text-center title-max">
+                                    {t('modal-title')}
                                 </h1>
                             )}
 
@@ -62,7 +69,7 @@ export const Modal = ({ isShow, closeModal, path }: Props) => {
                                                     <span className="icon me-2">
                                                         <MdOutlineLocationCity className="text-white" size={24} />
                                                     </span>
-                                                    <p className="text-white">Firma - ({point.x}, {point.y})</p>
+                                                    <p className="text-white">{t('firm')} - ({point.x}, {point.y})</p>
                                                 </div>
                                                 {index !== finalPath && (
                                                     <div className="flex items-center justify-center">
@@ -91,7 +98,7 @@ export const Modal = ({ isShow, closeModal, path }: Props) => {
                                 <span className="me-2">
                                     <LiaMapSignsSolid className="icon text-white " size={24} />
                                 </span>
-                                <p className="text-white text-center">Path distance: {Math.floor(path.distance * 100) / 100}</p>
+                                <p className="text-white text-center">{t('modal-result')}: {Math.floor(path.distance * 100) / 100}</p>
                             </div>
                         </motion.div>
                     </div>
