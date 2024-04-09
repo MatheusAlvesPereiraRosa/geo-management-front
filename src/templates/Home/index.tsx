@@ -21,13 +21,10 @@ export const Home = () => {
     const { users, isLoading, path } = useSelector((state: RootState) => state.user)
     const { lang } = useSelector((state: RootState) => state.language)
 
-    console.log(lang)
-
     const [isShow, setIsShow] = useState<boolean>(false)
 
     useEffect(() => {
         dispatch(fetchUsers())
-        console.log("Tô executando")
     }, [dispatch])
 
     const showModal = () => {

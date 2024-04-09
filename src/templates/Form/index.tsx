@@ -65,7 +65,7 @@ export const Form = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(form)
+
         createUser()
     }
 

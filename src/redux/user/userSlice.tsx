@@ -54,18 +54,11 @@ export const fetchUsers = () => async (dispatch: Dispatch) => {
 }
 
 export const fetchPath = (users: User[]) => async (dispatch: Dispatch) => {
-
-    console.log(users)
-
     try {
         const points = extractedPoints(users)
 
-        console.log(points)
-
         const response = await axios
             .post("http://localhost:3000/users/calculateDistanceSolution", { points: points })
-
-        console.log(response.data)
 
         dispatch(calcPathSucess(response.data))
     } catch (error: any) {
