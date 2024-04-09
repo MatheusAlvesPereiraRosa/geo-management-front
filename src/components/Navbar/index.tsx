@@ -79,31 +79,30 @@ export const Navbar = ({ lang }: Props) => {
                     styles={{
                         control: provided => ({
                             ...provided,
-                            backgroundColor: '#033b49', // Background color
-                            borderColor: '#fff', // Border color
+                            backgroundColor: '#033b49', 
+                            borderColor: '#fff',
                         }),
                         singleValue: provided => ({
                             ...provided,
-                            color: '#fff', // Text color
+                            color: '#fff', 
                         }),
                         menu: provided => ({
                             ...provided,
-                            backgroundColor: '#033b49', // Background color of the options modal
+                            backgroundColor: '#033b49', 
                         }),
                         option: (provided, state) => ({
                             ...provided,
-                            backgroundColor: '#033b49', // Background color of selected and non-selected options
-                            color: state.isSelected ? '#000' : '#fff', // Text color of selected and non-selected options
+                            backgroundColor: '#033b49', 
+                            color: state.isSelected ? '#000' : '#fff',
                             '&:hover': {
-                                backgroundColor: '#164e63', // Background color on hover
-                                color: '#000', // Text color on hover
+                                backgroundColor: '#164e63', 
+                                color: '#000',
                             },
                         }),
                     }}
                     isSearchable={false}
                     onChange={(lang) => {
                         dispatch(setLanguage(lang.value));
-                        console.log("Selected language:", lang);
                     }}
                 />
             </div>
