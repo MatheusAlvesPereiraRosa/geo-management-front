@@ -1,6 +1,6 @@
 interface Path {
     distance: number
-    points: Coordinates[]
+    points: PathCoord[]
 }
 
 interface Points {
@@ -10,6 +10,10 @@ interface Points {
 interface Coordinates {
     x: string | number
     y: string | number
+}
+
+interface PathCoord extends Coordinates {
+    user: string 
 }
 
 interface UserForm {
