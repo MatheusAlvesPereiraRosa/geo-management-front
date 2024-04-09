@@ -83,7 +83,7 @@ export const Modal = ({ isShow, closeModal, path }: Props) => {
                                                     <span className="icon me-2">
                                                         <IoLocationSharp className="text-white" size={24} />
                                                     </span>
-                                                    <p className="text-white">Nome {index} - ({point.x}, {point.y})</p>
+                                                    <p className="text-white">{point.user} - ({point.x}, {point.y})</p>
                                                 </div>
                                                 <div className="flex items-center justify-center">
                                                     <FaArrowDown className="text-white my-1" size={16} />
