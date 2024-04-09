@@ -72,11 +72,34 @@ export const Navbar = ({ lang }: Props) => {
 
             <div className="me-4">
                 <Select
-                    className="bg-cyan-950 border-cyan-800 shadow appearance-none border rounded"
                     options={LANGUAGE_OPTIONS}
                     defaultValue={LANGUAGE_OPTIONS.find(
                         (option) => option.value === lang
                     )}
+                    styles={{
+                        control: provided => ({
+                            ...provided,
+                            backgroundColor: '#033b49', // Background color
+                            borderColor: '#fff', // Border color
+                        }),
+                        singleValue: provided => ({
+                            ...provided,
+                            color: '#fff', // Text color
+                        }),
+                        menu: provided => ({
+                            ...provided,
+                            backgroundColor: '#033b49', // Background color of the options modal
+                        }),
+                        option: (provided, state) => ({
+                            ...provided,
+                            backgroundColor: '#033b49', // Background color of selected and non-selected options
+                            color: state.isSelected ? '#000' : '#fff', // Text color of selected and non-selected options
+                            '&:hover': {
+                                backgroundColor: '#164e63', // Background color on hover
+                                color: '#000', // Text color on hover
+                            },
+                        }),
+                    }}
                     isSearchable={false}
                     onChange={(lang) => {
                         dispatch(setLanguage(lang.value));
