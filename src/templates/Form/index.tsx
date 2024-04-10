@@ -16,6 +16,15 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { Alert } from "../../components/Alert";
 
+const FORM_RESET = {
+    name: "",
+    email: "",
+    phoneNumber: "",
+    coordinates: {
+        x: "",
+        y: ""
+    }
+}
 
 export const Form = () => {
     const [form, setForm] = useState<UserForm>({
@@ -56,6 +65,7 @@ export const Form = () => {
                 setMessage(res.data)
                 console.log(res.data)
                 showAlert()
+                setForm(FORM_RESET)
             })
             .catch((err) => {
                 setMessage(err.response.data)
