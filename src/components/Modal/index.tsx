@@ -9,8 +9,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { useTranslation } from "react-i18next";
 
-import "./index.css"
-
 interface Props {
     isShow: boolean;
     path: Path;

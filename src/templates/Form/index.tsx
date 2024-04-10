@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { UserForm } from "../../interfaces"
+import { UserForm, UserRes } from "../../interfaces"
 import { Navbar } from "../../components/Navbar"
 
 import { FaUserLarge, FaSquarePhoneFlip } from "react-icons/fa6";
@@ -14,6 +14,7 @@ import { RootState } from "../../redux/store";
 import { useTranslation } from "react-i18next";
 
 import axios from "axios";
+import { Alert } from "../../components/Alert";
 
 
 export const Form = () => {
@@ -31,16 +32,35 @@ export const Form = () => {
 
     const { lang } = useSelector((state: RootState) => state.language)
 
-    const [message, setMessage] = useState({})
+    const [message, setMessage] = useState<UserRes>({
+        type: ""
+    })
+    const [alertShow, setAlertShow] = useState<boolean>(false)
+
+    const showAlert = () => {
+        setAlertShow(true)
+
+        setTimeout(() => {
+            dismissAlert()
+        }, 6000)
+    }
+
+    const dismissAlert = () => {
+        setAlertShow(false)
+    }
 
     const createUser = async () => {
         await axios
             .post("http://localhost:3000/users/create", form)
             .then((res) => {
                 setMessage(res.data)
+                console.log(res.data)
+                showAlert()
             })
             .catch((err) => {
-                console.log(err)
+                setMessage(err.response.data)
+                console.log(err.response.data)
+                showAlert()
             })
     }
 
@@ -72,6 +92,7 @@ export const Form = () => {
     return (
         <>
             <Navbar lang={lang} />
+            <Alert alertShow={alertShow} {...message}/>
             <div className="flex justify-center my-12">
                 <motion.form
                     initial={{ opacity: 0, translateY: 50 }}

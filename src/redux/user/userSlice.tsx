@@ -1,15 +1,19 @@
-import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit/react"
+import { createSlice, PayloadAction, Dispatch, ThunkAction, Action } from "@reduxjs/toolkit/react"
 import { UserState } from "../interfaces"
-import { User, UserForm, Coordinates, Path } from "../../interfaces"
+import { User, Path } from "../../interfaces"
+
+import { RootState } from "../store"
 
 import axios from "axios"
 import { extractedPoints } from "../../utils/functions"
-
 
 /* Initial State */
 const initialState: UserState = {
     users: [],
     isLoading: false,
+    message: {
+        type: ""
+    },
     path: {
         distance: 0,
         points: []
@@ -42,29 +46,25 @@ const userSlice = createSlice({
 
 /* Action Creator */
 /** Responsaveis por realizar as ações por fora dos reducers */
-export const fetchUsers = () => async (dispatch: Dispatch) => {
+export const fetchUsers = (): ThunkAction<void, RootState, unknown, Action<string>> => async (dispatch: Dispatch) => {
     try {
-        dispatch(getUsersStart())
-        const response = await axios
-            .get('http://localhost:3000/users')
-        dispatch(getUsersSucess(response.data))
+        dispatch(getUsersStart());
+        const response = await axios.get<User[]>('http://localhost:3000/users');
+        dispatch(getUsersSucess(response.data));
     } catch (error: any) {
-        dispatch(getUsersFailure(error.message))
-    }
-}
-
-export const fetchPath = (users: User[]) => async (dispatch: Dispatch) => {
-    try {
-        const points = extractedPoints(users)
-
-        const response = await axios
-            .post("http://localhost:3000/users/calculateDistanceSolution", { points: points })
-
-        dispatch(calcPathSucess(response.data))
-    } catch (error: any) {
-        dispatch(getUsersFailure())
+        dispatch(getUsersFailure(error.response.message));
     }
 };
+
+export const fetchPath = (users: User[]): ThunkAction<void, RootState, unknown, Action<string>> => async (dispatch: Dispatch) => {
+    try {
+        const points = extractedPoints(users);
+        const response = await axios.post<Path>('http://localhost:3000/users/calculateDistanceSolution', { points });
+        dispatch(calcPathSucess(response.data));
+    } catch (error: any) {
+        dispatch(getUsersFailure()); // Should this be getUsersFailure or calcPathFailure?
+    }
+}
 
 export const { getUsersStart, getUsersSucess, getUsersFailure, calcPathSucess } = userSlice.actions
 

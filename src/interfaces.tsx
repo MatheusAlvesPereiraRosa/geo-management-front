@@ -23,6 +23,14 @@ interface UserForm {
     coordinates: Coordinates
 }
 
+interface UserRes {
+    type: string,
+    msgBR?: string,
+    msgEN?: string,
+    errBR?: string,
+    errEN?: string,
+}
+
 interface User {
     name: string
     email: string
@@ -31,4 +39,4 @@ interface User {
     coordinatesY: string
 }
 
-export type { Coordinates, Points, UserForm, User, Path }
+export type { Coordinates, Points, UserForm, UserRes, User, Path }

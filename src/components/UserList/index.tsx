@@ -8,12 +8,21 @@ interface props {
 
 export const UserList = ({ users }: props) => {
     return (
-        <div className='grid grid-cols-4 gap-10'>
-            {users.length > 0 &&
-                users.map((user, index) => (
-                    <UserItem key={user.name} {...user} index={index} />
-                ))
+        <>
+            {users.length === 0
+                ?
+                <div className="h-[68vh]">
+                    <p className="mt-8 text-xl text-white">Não há usuários cadastrados no momento...</p>
+                </div>
+                :
+                <div className='grid grid-cols-4 gap-10'>
+                    {users.length > 0 &&
+                        users.map((user, index) => (
+                            <UserItem key={user.name} {...user} index={index} />
+                        ))
+                    }
+                </div>
             }
-        </div>
+        </>
     )
 }
