@@ -1,31 +1,44 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# geo-managment-front
 
-Currently, two official plugins are available:
+Seja bem vindo ao meu projeto, sou Matheus Alves e esse projeto foi feito seguindo alguns especificações técnicas de um desafio que recebe, entretanto, acabei adicionando alguns conteúdos a mais nele seguindo alguns estudos meus na época.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Haverão duas telas:
 
-## Expanding the ESLint configuration
+ Home: serve para visualizar a listagem dos usuários cadastrados na aplicação e visualizar o caminho mais otimizado da sede/fábrica passando por todos os usuários e voltando para o início(de acordo com alguns critérios)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+ Formulário: Para cadastrar novos usuários
 
-- Configure the top-level `parserOptions` property like this:
+## Especificações
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+O Front-End foi dividido de acordo com boas práticas na hora de organizar a aplicação, sendo as pastas principais:
+
+- Components: Pasta utilizada para guardar os componentes reutilizáveis e menores da aplicação
+
+- Templates: As páginas em si, com a parte que sofre alterações sendo representada pelos arquivos desta pasta
+
+- Redux: Os arquivos necessários para organizar os estados globais da aplicação (users, layout e language)
+
+- Utils: Pasta responsável pelos arquivos extras/utilitários que poderão ser reutilizados na aplicação
+
+- Assets: Pasta onde são guardados imagens que são utilizadas na aplicação
+
+## Instalação
+
+Clone o repositório com o comando git clone no github e abra o arquivo com o terminal de sua escolha.
+
+Depois rode o comando:
+
+```bash
+  npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# geo-management-front
+Após isso rode o projeto com o comando npm run dev
+
+```bash
+  npm run dev
+```
+
+E pronto, o projeto já o Front-End já vai estar rodando. Vale salienter que o Back-End deve ter sido totalmente funcional antes para que as funcionalidades no Front funcionem normalmente.
+
+
